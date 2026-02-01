@@ -10,7 +10,7 @@ This document provides instructions on how to set up the local development envir
 
 ## Infrastructure Setup (Database & Kafka)
 
-We use Docker Compose to spin up MySQL, Zookeeper, Kafka, and Kafka UI.
+We use Docker Compose to spin up MySQL, Zookeeper, Kafka, and Kafka UI using **shared custom images** to ensure everyone has the exact same environment.
 
 1.  Navigate to the `docker` directory:
     ```bash
@@ -22,18 +22,20 @@ We use Docker Compose to spin up MySQL, Zookeeper, Kafka, and Kafka UI.
     docker-compose up -d
     ```
 
-    This will start the following services:
+    This will pull the pre-configured images (`baguette21/ectrivia-*`) and start:
     *   **MySQL Database**:
         *   Port: `3306`
         *   Database: `ectrivia_db`
         *   Username: `ectrivia`
         *   Password: `ectrivia123`
         *   Root Password: `root`
-        *   It will automatically initialize with `init.sql`.
+        *   It uses the shared image `baguette21/ectrivia-mysql:latest`.
     *   **Apache Kafka**:
         *   Port: `9092` (exposed to localhost)
+        *   Image: `baguette21/ectrivia-kafka:latest`
     *   **Zookeeper**:
         *   Port: `2181`
+        *   Image: `baguette21/ectrivia-zookeeper:latest`
     *   **Kafka UI**:
         *   Port: `8080`
         *   URL: [http://localhost:8080](http://localhost:8080) (Use this to inspect topics and messages)
