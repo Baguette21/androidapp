@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: trivia-game-service
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/ectrivia_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&createDatabaseIfNotExist=true
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+        format_sql: true
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      auto-offset-reset: earliest
+
+server:
+  port: 8081
+
+logging:
+  level:
+    com.delacruz.trivia: DEBUG
+    org.springframework.kafka: INFO
